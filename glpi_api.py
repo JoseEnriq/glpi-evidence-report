@@ -71,9 +71,11 @@ TIMEOUT_SECONDS = 60  # max wait per response; keeps the program from hanging if
 API_PAGE_SIZE = 100  # items requested per list call (the server may return fewer)
 ATTEMPTS = 3  # attempts per request on network failure or 5xx
 MAX_WORKERS = 6  # tickets fetched at the same time; low on purpose, to avoid overloading GLPI
-# "Central" profiles (that can see other users' tickets), from most to least
-# privileged. Self-Service is left out: it only sees the user's own tickets.
-PROFILE_ORDER = ["super-admin", "admin", "supervisor", "technician", "observer", "read-only", "hotliner"]
+# "Central" profiles (that can see other users' tickets), in order of
+# preference: least privileged first (least privilege — the program only
+# reads). Hotliner comes last because, depending on its rights, it may not
+# see every ticket. Self-Service is left out: it only sees the user's own tickets.
+PROFILE_ORDER = ["read-only", "observer", "technician", "supervisor", "admin", "super-admin", "hotliner"]
 SYSTEM_AUTHOR = "Sistema/GLPI"  # shown in the report when an update has no user
 
 
@@ -170,9 +172,10 @@ class ApiClient:
         candidates = [p for p in profiles if p["name"].lower() in PROFILE_ORDER]
         if not candidates:
             return  # Self-Service only: keep going and GLPI will deny what is not the user's
-        # Pick the most privileged one, because visibility of ALL tickets
-        # depends on it. If the user only has a read-only profile (service
-        # account), that one is chosen anyway.
+        # Pick the least privileged central profile: read-only/observer
+        # already see every ticket and attachment, and the program never
+        # needs more than reading. A more privileged one is only used when
+        # it is the only central profile the user has.
         candidates.sort(key=lambda p: PROFILE_ORDER.index(p["name"].lower()))
         self.http.post(
             self.api + "/changeActiveProfile",
