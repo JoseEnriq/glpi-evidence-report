@@ -1,0 +1,728 @@
+{
+  "_comment": "100% FICTITIOUS data for demo mode. People, company, tickets and addresses are made up. The format mimics what the GLPI 10 REST API returns; simulator/fake_glpi.py serves this data as if it were the server. Ticket texts are in Portuguese because the generated report is.",
+  "profiles": [
+    {
+      "id": 1,
+      "name": "Self-Service"
+    },
+    {
+      "id": 6,
+      "name": "Observer"
+    }
+  ],
+  "users": {
+    "10": {
+      "name": "ana.ribeiro",
+      "firstname": "Ana",
+      "realname": "Ribeiro"
+    },
+    "11": {
+      "name": "bruno.carvalho",
+      "firstname": "Bruno",
+      "realname": "Carvalho"
+    },
+    "12": {
+      "name": "carla.nogueira",
+      "firstname": "Carla",
+      "realname": "Nogueira"
+    },
+    "13": {
+      "name": "diego.martins",
+      "firstname": "Diego",
+      "realname": "Martins"
+    },
+    "20": {
+      "name": "fernanda.lopes",
+      "firstname": "Fernanda",
+      "realname": "Lopes"
+    },
+    "21": {
+      "name": "gabriel.rocha",
+      "firstname": "Gabriel",
+      "realname": "Rocha"
+    },
+    "22": {
+      "name": "helena.duarte",
+      "firstname": "Helena",
+      "realname": "Duarte"
+    },
+    "23": {
+      "name": "igor.pacheco",
+      "firstname": "Igor",
+      "realname": "Pacheco"
+    },
+    "24": {
+      "name": "juliana.freitas",
+      "firstname": "Juliana",
+      "realname": "Freitas"
+    }
+  },
+  "categories": {
+    "1": "Acessos > Desbloqueio de usuário",
+    "2": "Hardware > Impressoras",
+    "3": "Rede > Wi-Fi",
+    "4": "Comunicação > Site institucional",
+    "5": "Aplicações > Relatórios",
+    "6": "Software > Instalação",
+    "7": "Rede > VPN",
+    "8": "Infraestrutura > Backup e restauração",
+    "9": "Infraestrutura > Servidores",
+    "10": "Acessos > Contas de e-mail",
+    "11": "Hardware > Periféricos"
+  },
+  "entities": {
+    "0": "Entidade raiz",
+    "1": "Entidade raiz > Empresa Exemplo > Sede",
+    "2": "Entidade raiz > Empresa Exemplo > Filial Norte"
+  },
+  "documents": {
+    "501": {
+      "filename": "portal_login_error.png",
+      "mime": "image/png",
+      "file": "portal_login_error.png"
+    },
+    "502": {
+      "filename": "user_unlocked.png",
+      "mime": "image/png",
+      "file": "user_unlocked.png"
+    },
+    "503": {
+      "filename": "print_queue_stuck.png",
+      "mime": "image/png",
+      "file": "print_queue_stuck.png"
+    },
+    "504": {
+      "filename": "printer_ready.png",
+      "mime": "image/png",
+      "file": "printer_ready.png"
+    },
+    "505": {
+      "filename": "wifi_connected.png",
+      "mime": "image/png",
+      "file": "wifi_connected.png"
+    },
+    "506": {
+      "filename": "site_old_banner.png",
+      "mime": "image/png",
+      "file": "site_old_banner.png"
+    },
+    "507": {
+      "filename": "site_new_banner.png",
+      "mime": "image/png",
+      "file": "site_new_banner.png"
+    },
+    "508": {
+      "filename": "sales_report_fixed.png",
+      "mime": "image/png",
+      "file": "sales_report_fixed.png"
+    },
+    "509": {
+      "filename": "install_complete.png",
+      "mime": "image/png",
+      "file": "install_complete.png"
+    },
+    "510": {
+      "filename": "vpn_connected.png",
+      "mime": "image/png",
+      "file": "vpn_connected.png"
+    },
+    "511": {
+      "filename": "backup_restore.png",
+      "mime": "image/png",
+      "file": "backup_restore.png"
+    },
+    "512": {
+      "filename": "service_restarted.png",
+      "mime": "image/png",
+      "file": "service_restarted.png"
+    },
+    "513": {
+      "name": "Procedimento de acesso à VPN",
+      "filename": "procedimento_vpn.pdf",
+      "mime": "application/pdf"
+    },
+    "514": {
+      "filename": "print_tela_usuario.png",
+      "mime": "image/png",
+      "invalid_response": true
+    }
+  },
+  "tickets": [
+    {
+      "id": 99,
+      "name": "Chamado de julho (fora do período da demonstração)",
+      "status": 6,
+      "priority": 3,
+      "itilcategories_id": 11,
+      "entities_id": 1,
+      "date_creation": "2026-07-30 16:20:00",
+      "solvedate": "2026-07-31 09:00:00",
+      "users_id_recipient": 21,
+      "is_deleted": 0,
+      "content": "<p>Este chamado existe só para mostrar que a busca respeita o período.</p>",
+      "actors": [
+        {
+          "users_id": 21,
+          "type": 1
+        },
+        {
+          "users_id": 10,
+          "type": 2
+        }
+      ],
+      "documents": [],
+      "followups": [],
+      "solutions": []
+    },
+    {
+      "id": 101,
+      "name": "Usuário bloqueado no Portal do Cliente",
+      "status": 5,
+      "priority": 3,
+      "itilcategories_id": 1,
+      "entities_id": 1,
+      "date_creation": "2026-08-03 08:12:40",
+      "solvedate": "2026-08-03 09:41:05",
+      "users_id_recipient": 20,
+      "is_deleted": 0,
+      "content": "<p>Bom dia! Não consigo entrar no Portal do Cliente: depois de errar a senha algumas vezes, aparece a mensagem de usuário bloqueado.</p><p>Segue o print da tela.</p>",
+      "actors": [
+        {
+          "users_id": 20,
+          "type": 1
+        },
+        {
+          "users_id": 10,
+          "type": 2
+        }
+      ],
+      "documents": [
+        501
+      ],
+      "followups": [
+        {
+          "id": 2001,
+          "users_id": 10,
+          "date_creation": "2026-08-03 08:35:12",
+          "content": "<p>Recebido. Verificando o cadastro no painel de administração do portal.</p>",
+          "documents": []
+        }
+      ],
+      "solutions": [
+        {
+          "id": 3001,
+          "users_id": 10,
+          "date_creation": "2026-08-03 09:41:05",
+          "content": "<p>Usuário desbloqueado no painel de administração e senha temporária enviada por e-mail. Orientada a trocar a senha no primeiro acesso.</p>",
+          "documents": [
+            502
+          ]
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "name": "Impressora do administrativo não imprime",
+      "status": 6,
+      "priority": 3,
+      "itilcategories_id": 2,
+      "entities_id": 1,
+      "date_creation": "2026-08-04 10:02:18",
+      "solvedate": "2026-08-04 14:27:50",
+      "users_id_recipient": 21,
+      "is_deleted": 0,
+      "content": "<p>A impressora do 2º andar (IMP-ADM-02) não imprime nada desde cedo. Os documentos ficam parados na fila.</p>",
+      "actors": [
+        {
+          "users_id": 21,
+          "type": 1
+        },
+        {
+          "users_id": 11,
+          "type": 2
+        }
+      ],
+      "documents": [],
+      "followups": [
+        {
+          "id": 2002,
+          "users_id": 11,
+          "date_creation": "2026-08-04 10:40:03",
+          "content": "<p>Fila de impressão travada: a impressora aparece offline para o servidor. Indo até o local.</p>",
+          "documents": [
+            503
+          ]
+        },
+        {
+          "id": 2003,
+          "users_id": 11,
+          "date_creation": "2026-08-04 13:58:44",
+          "content": "<p>A impressora tinha recebido outro endereço IP depois de uma queda de energia. Configurado IP fixo e atualizado o driver no servidor de impressão.</p>",
+          "documents": []
+        }
+      ],
+      "solutions": [
+        {
+          "id": 3002,
+          "users_id": 11,
+          "date_creation": "2026-08-04 14:27:50",
+          "content": "<p>Impressora com IP fixo e fila liberada. Página de teste impressa com sucesso; trabalhos pendentes reenviados.</p>",
+          "documents": [
+            504
+          ]
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "name": "Notebook não conecta no Wi-Fi corporativo",
+      "status": 5,
+      "priority": 3,
+      "itilcategories_id": 3,
+      "entities_id": 2,
+      "date_creation": "2026-08-05 09:15:00",
+      "solvedate": "2026-08-05 11:02:31",
+      "users_id_recipient": 22,
+      "is_deleted": 0,
+      "content": "<p>Meu notebook parou de conectar na rede EXEMPLO-CORP. Em outras redes funciona normalmente.</p>",
+      "actors": [
+        {
+          "users_id": 22,
+          "type": 1
+        },
+        {
+          "users_id": 12,
+          "type": 2
+        }
+      ],
+      "documents": [],
+      "followups": [
+        {
+          "id": 2004,
+          "users_id": 12,
+          "date_creation": "2026-08-05 09:47:29",
+          "content": "<p>O certificado usado na autenticação da rede venceu neste equipamento. Agendado atendimento remoto.</p>",
+          "documents": []
+        }
+      ],
+      "solutions": [
+        {
+          "id": 3003,
+          "users_id": 12,
+          "date_creation": "2026-08-05 11:02:31",
+          "content": "<p>Certificado renovado e perfil de rede recriado. Notebook conectado na EXEMPLO-CORP (5 GHz).</p>",
+          "documents": [
+            505
+          ]
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "name": "Atualizar banner da página inicial do site",
+      "status": 6,
+      "priority": 2,
+      "itilcategories_id": 4,
+      "entities_id": 1,
+      "date_creation": "2026-08-06 14:30:10",
+      "solvedate": "2026-08-07 10:15:42",
+      "users_id_recipient": 24,
+      "is_deleted": 0,
+      "content": "<p>Precisamos trocar o banner da página inicial pelo da Semana de Segurança da Informação (24 a 28/08).</p><p>Em anexo, como está hoje.</p>",
+      "actors": [
+        {
+          "users_id": 24,
+          "type": 1
+        },
+        {
+          "users_id": 10,
+          "type": 2
+        }
+      ],
+      "documents": [
+        506
+      ],
+      "followups": [],
+      "solutions": [
+        {
+          "id": 3004,
+          "users_id": 10,
+          "date_creation": "2026-08-07 10:15:42",
+          "content": "<p>Banner publicado na página inicial, com link para a página de inscrição. Conferido no computador e no celular.</p>",
+          "documents": [
+            507
+          ]
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "name": "Relatório de vendas com totais divergentes",
+      "status": 5,
+      "priority": 4,
+      "itilcategories_id": 5,
+      "entities_id": 1,
+      "date_creation": "2026-08-10 08:05:33",
+      "solvedate": "2026-08-12 16:48:19",
+      "users_id_recipient": 23,
+      "is_deleted": 0,
+      "content": "<p>O relatório de vendas por filial de julho está com o total diferente da soma das filiais.</p>",
+      "actors": [
+        {
+          "users_id": 23,
+          "type": 1
+        },
+        {
+          "users_id": 11,
+          "type": 3
+        }
+      ],
+      "documents": [],
+      "followups": [
+        {
+          "id": 2005,
+          "users_id": 11,
+          "date_creation": "2026-08-10 11:20:00",
+          "content": "<p>Reproduzido. O filtro de datas considerava o último dia do mês só até 00:00, deixando de fora os pedidos daquele dia.</p>",
+          "documents": []
+        },
+        {
+          "id": 2006,
+          "users_id": 23,
+          "date_creation": "2026-08-11 09:12:51",
+          "content": "<p>Obrigado. Precisamos do relatório corrigido até sexta-feira.</p>",
+          "documents": []
+        }
+      ],
+      "solutions": [
+        {
+          "id": 3005,
+          "users_id": 11,
+          "date_creation": "2026-08-12 16:48:19",
+          "content": "<p>Corrigido o filtro de datas (fim do período passou a ser exclusivo, no primeiro instante do dia seguinte). Totais conferidos com a soma das filiais.</p>",
+          "documents": [
+            508
+          ]
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "name": "Instalação do Editor de Diagramas",
+      "status": 6,
+      "priority": 2,
+      "itilcategories_id": 6,
+      "entities_id": 2,
+      "date_creation": "2026-08-11 13:40:00",
+      "solvedate": "2026-08-11 15:05:12",
+      "users_id_recipient": 20,
+      "is_deleted": 0,
+      "content": "<p>Solicito a instalação do Editor de Diagramas no meu computador, com a licença corporativa.</p>",
+      "actors": [
+        {
+          "users_id": 20,
+          "type": 1
+        },
+        {
+          "users_id": 12,
+          "type": 2
+        }
+      ],
+      "documents": [],
+      "followups": [],
+      "solutions": [
+        {
+          "id": 3006,
+          "users_id": 12,
+          "date_creation": "2026-08-11 15:05:12",
+          "content": "<p>Software instalado com a licença corporativa e integrado ao armazenamento em rede.</p>",
+          "documents": [
+            509
+          ]
+        }
+      ]
+    },
+    {
+      "id": 107,
+      "name": "Acesso à VPN para trabalho remoto",
+      "status": 5,
+      "priority": 3,
+      "itilcategories_id": 7,
+      "entities_id": 1,
+      "date_creation": "2026-08-13 09:00:00",
+      "solvedate": "2026-08-13 11:30:00",
+      "users_id_recipient": 21,
+      "is_deleted": 0,
+      "content": "<p>Vou trabalhar remotamente na próxima semana e preciso de acesso à VPN.</p>",
+      "actors": [
+        {
+          "users_id": 21,
+          "type": 1
+        },
+        {
+          "users_id": 10,
+          "type": 3
+        }
+      ],
+      "documents": [],
+      "followups": [
+        {
+          "id": 2007,
+          "users_id": 10,
+          "date_creation": "2026-08-13 10:10:00",
+          "content": "<p>Acesso liberado no grupo de VPN. Segue o procedimento de instalação do cliente.</p>",
+          "documents": [
+            513
+          ]
+        }
+      ],
+      "solutions": [
+        {
+          "id": 3007,
+          "users_id": 10,
+          "date_creation": "2026-08-13 11:30:00",
+          "content": "<p>Cliente VPN instalado e conexão testada junto com o usuário.</p>",
+          "documents": [
+            510
+          ]
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "name": "Restaurar pasta excluída no servidor de arquivos",
+      "status": 6,
+      "priority": 4,
+      "itilcategories_id": 8,
+      "entities_id": 1,
+      "date_creation": "2026-08-12 08:30:00",
+      "solvedate": "2026-08-12 10:05:00",
+      "users_id_recipient": 22,
+      "is_deleted": 0,
+      "content": "<p>A pasta do financeiro de 2026 foi apagada por engano ontem à tarde. Dá para recuperar?</p>",
+      "actors": [
+        {
+          "users_id": 22,
+          "type": 1
+        },
+        {
+          "users_id": 11,
+          "type": 2
+        }
+      ],
+      "documents": [],
+      "followups": [
+        {
+          "id": 2008,
+          "users_id": 11,
+          "date_creation": "2026-08-12 08:55:00",
+          "content": "<p>Localizado o ponto de restauração da noite anterior (11/08, 23:00). Iniciando a restauração no local original.</p>",
+          "documents": []
+        }
+      ],
+      "solutions": [
+        {
+          "id": 3008,
+          "users_id": 11,
+          "date_creation": "2026-08-12 10:05:00",
+          "content": "<p>Pasta restaurada: 214 arquivos (1,8 GB). Usuária conferiu que os arquivos estão completos.</p>",
+          "documents": [
+            511
+          ]
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "name": "Sistema de agendamentos fora do ar",
+      "status": 5,
+      "priority": 5,
+      "itilcategories_id": 9,
+      "entities_id": 1,
+      "date_creation": "2026-08-19 10:02:00",
+      "solvedate": "2026-08-19 10:55:00",
+      "users_id_recipient": 23,
+      "is_deleted": 0,
+      "content": "<p>O sistema de agendamentos não abre para ninguém do atendimento. Print da tela em anexo.</p>",
+      "actors": [
+        {
+          "users_id": 23,
+          "type": 1
+        },
+        {
+          "users_id": 12,
+          "type": 2
+        }
+      ],
+      "documents": [
+        514
+      ],
+      "followups": [
+        {
+          "id": 2009,
+          "users_id": 12,
+          "date_creation": "2026-08-19 10:44:00",
+          "content": "<p>O serviço parou porque o disco de logs encheu. Feita a rotação dos logs e reiniciado o serviço.</p>",
+          "documents": [
+            512
+          ]
+        }
+      ],
+      "solutions": [
+        {
+          "id": 3009,
+          "users_id": 12,
+          "date_creation": "2026-08-19 10:55:00",
+          "content": "<p>Sistema no ar novamente. Criado alerta de uso de disco para evitar a repetição.</p>",
+          "documents": []
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "name": "Criar e-mail para novo colaborador",
+      "status": 2,
+      "priority": 3,
+      "itilcategories_id": 10,
+      "entities_id": 2,
+      "date_creation": "2026-08-26 15:20:00",
+      "solvedate": null,
+      "users_id_recipient": 24,
+      "is_deleted": 0,
+      "content": "<p>Novo colaborador começa no dia 01/09. Favor criar a conta de e-mail e incluir nos grupos do setor.</p>",
+      "actors": [
+        {
+          "users_id": 24,
+          "type": 1
+        },
+        {
+          "users_id": 10,
+          "type": 2
+        }
+      ],
+      "documents": [],
+      "followups": [
+        {
+          "id": 2010,
+          "users_id": 10,
+          "date_creation": "2026-08-27 09:00:00",
+          "content": "<p>Conta criada. Aguardando a confirmação dos grupos com a gestora do setor.</p>",
+          "documents": []
+        }
+      ],
+      "solutions": []
+    },
+    {
+      "id": 111,
+      "name": "Trocar mouse com defeito",
+      "status": 4,
+      "priority": 2,
+      "itilcategories_id": 11,
+      "entities_id": 1,
+      "date_creation": "2026-08-27 11:11:11",
+      "solvedate": null,
+      "users_id_recipient": 20,
+      "is_deleted": 0,
+      "content": "<p>O botão esquerdo do mouse está falhando.</p>",
+      "actors": [
+        {
+          "users_id": 20,
+          "type": 1
+        },
+        {
+          "users_id": 11,
+          "type": 2
+        }
+      ],
+      "documents": [],
+      "followups": [
+        {
+          "id": 2011,
+          "users_id": 11,
+          "date_creation": "2026-08-27 14:00:00",
+          "content": "<p>Sem mouse em estoque. Chamado pendente até a chegada do pedido de compra.</p>",
+          "documents": []
+        }
+      ],
+      "solutions": []
+    },
+    {
+      "id": 112,
+      "name": "Dúvida sobre planilha de horas",
+      "status": 5,
+      "priority": 1,
+      "itilcategories_id": 6,
+      "entities_id": 1,
+      "date_creation": "2026-08-28 09:30:00",
+      "solvedate": "2026-08-28 10:00:00",
+      "users_id_recipient": 21,
+      "is_deleted": 0,
+      "content": "<p>Como faço para somar as horas da planilha sem dar erro?</p>",
+      "actors": [
+        {
+          "users_id": 21,
+          "type": 1
+        },
+        {
+          "users_id": 13,
+          "type": 2
+        }
+      ],
+      "documents": [],
+      "followups": [],
+      "solutions": [
+        {
+          "id": 3012,
+          "users_id": 13,
+          "date_creation": "2026-08-28 10:00:00",
+          "content": "<p>Formatada a coluna como [h]:mm para somar mais de 24 horas.</p>",
+          "documents": []
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "name": "Monitor piscando",
+      "status": 1,
+      "priority": 3,
+      "itilcategories_id": 11,
+      "entities_id": 2,
+      "date_creation": "2026-08-31 17:45:00",
+      "solvedate": null,
+      "users_id_recipient": 22,
+      "is_deleted": 0,
+      "content": "<p>O monitor fica piscando de vez em quando.</p>",
+      "actors": [
+        {
+          "users_id": 22,
+          "type": 1
+        }
+      ],
+      "documents": [],
+      "followups": [],
+      "solutions": []
+    },
+    {
+      "id": 114,
+      "name": "Teste — apagar",
+      "status": 1,
+      "priority": 3,
+      "itilcategories_id": 0,
+      "entities_id": 0,
+      "date_creation": "2026-08-14 12:00:00",
+      "solvedate": null,
+      "users_id_recipient": 10,
+      "is_deleted": 1,
+      "content": "<p>Chamado de teste na lixeira: a busca não deve trazê-lo.</p>",
+      "actors": [
+        {
+          "users_id": 10,
+          "type": 1
+        }
+      ],
+      "documents": [],
+      "followups": [],
+      "solutions": []
+    }
+  ]
+}
