@@ -40,6 +40,18 @@ def test_login_and_profile_switch():
         source.close()
 
 
+def test_profile_switch_prefers_least_privileged():
+    session, adapter = fake_glpi_session(DEMO_INSTANCE.url)
+    adapter.data["profiles"].insert(1, {"id": 4, "name": "Super-Admin"})
+    source = open_source(DEMO_INSTANCE, session)
+    try:
+        client = source.client
+        r = client.http.get(client.api + "/getActiveProfile", headers=client.headers())
+        assert r.json()["active_profile"]["name"] == "Observer"  # not Super-Admin
+    finally:
+        source.close()
+
+
 def test_wrong_token_is_rejected(monkeypatch):
     monkeypatch.setenv("GLPI_DEMO_API_USER_TOKEN", "wrong-token")
     session, _ = fake_glpi_session(DEMO_INSTANCE.url)
