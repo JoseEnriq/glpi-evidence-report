@@ -6,7 +6,6 @@
 Lê os chamados de um período, junta descrição, histórico, solução e as imagens anexadas, e monta um "book de evidências" em Word e PDF — sem passo manual.
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
-![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
 ![Testes](https://img.shields.io/badge/testes-pytest-0A9EDC?logo=pytest&logoColor=white)
 
 | Capa com resumo por técnico | Sumário com links | Chamado com linha do tempo e evidências |
@@ -201,4 +200,6 @@ Os testes cobrem as funções puras (paginação, assinatura de imagem, HTML →
 
 ## Licença
 
-[MIT](LICENSE)
+© 2026 JoseEnriq. Todos os direitos reservados.
+
+Este repositório é publicado como peça de portfólio: fique à vontade para ler o código e rodar a demonstração, mas ele não pode ser copiado, modificado ou redistribuído sem autorização.

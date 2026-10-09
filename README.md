@@ -6,7 +6,6 @@
 It reads the tickets of a period, gathers description, history, solution and attached screenshots, and produces an "evidence book" in Word and PDF — with no manual steps.
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
-![License MIT](https://img.shields.io/badge/license-MIT-green)
 ![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white)
 
 | Cover with a summary per technician | Table of contents with links | Ticket with timeline and evidence |
@@ -214,4 +213,6 @@ The tests cover the pure functions (pagination, image signature, HTML → text, 
 
 ## License
 
-[MIT](LICENSE)
+© 2026 JoseEnriq. All rights reserved.
+
+This repository is published as a portfolio piece: you are welcome to read the code and run the demo, but it may not be copied, modified or redistributed without permission.
