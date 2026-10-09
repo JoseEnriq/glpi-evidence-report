@@ -1,0 +1,6 @@
+# Development only: tests, regenerating the demo's fictitious images and the
+# README screenshots. Not needed to use the program.
+-r requirements.txt
+pytest>=8.0
+Pillow>=10.1
+pymupdf>=1.24
