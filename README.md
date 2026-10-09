@@ -6,7 +6,7 @@
 It reads the tickets of a period, gathers description, history, solution and attached screenshots, and produces an "evidence book" in Word and PDF — with no manual steps.
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?logo=pytest&logoColor=white)
+[![Tests](https://github.com/JoseEnriq/glpi-evidence-report/actions/workflows/tests.yml/badge.svg)](https://github.com/JoseEnriq/glpi-evidence-report/actions/workflows/tests.yml)
 
 | Cover with a summary per technician | Table of contents with links | Ticket with timeline and evidence |
 |---|---|---|

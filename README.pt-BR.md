@@ -6,7 +6,7 @@
 Lê os chamados de um período, junta descrição, histórico, solução e as imagens anexadas, e monta um "book de evidências" em Word e PDF — sem passo manual.
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
-![Testes](https://img.shields.io/badge/testes-pytest-0A9EDC?logo=pytest&logoColor=white)
+[![Testes](https://github.com/JoseEnriq/glpi-evidence-report/actions/workflows/tests.yml/badge.svg)](https://github.com/JoseEnriq/glpi-evidence-report/actions/workflows/tests.yml)
 
 | Capa com resumo por técnico | Sumário com links | Chamado com linha do tempo e evidências |
 |---|---|---|
