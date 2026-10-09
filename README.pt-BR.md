@@ -152,7 +152,7 @@ python generate_report.py --instance main --period 2026-08-01 2026-08-31 --techn
 python generate_report.py --instance main --ids 101,105 --pdf
 ```
 
-No Windows, `generate_month.bat` roda o `generate_month.py` e pode ser agendado no Agendador de Tarefas.
+No Windows, `generate_month.bat` roda o `generate_month.py`. Aberto com duplo clique, ele espera uma tecla no final para dar tempo de ler a saída; no Agendador de Tarefas, passe o argumento `--scheduled` (sem pausa, e uma execução com falha é informada pelo código de saída).
 
 ### Se algo falhar
 

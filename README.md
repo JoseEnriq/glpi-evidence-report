@@ -165,7 +165,7 @@ python generate_report.py --instance main --period 2026-08-01 2026-08-31 --techn
 python generate_report.py --instance main --ids 101,105 --pdf
 ```
 
-On Windows, `generate_month.bat` runs `generate_month.py` and can be scheduled with Task Scheduler.
+On Windows, `generate_month.bat` runs `generate_month.py`. Opened with a double-click, it waits for a key at the end so the output can be read; in Task Scheduler, pass the argument `--scheduled` (no pause, and a failed run is reported through the exit code).
 
 ### Troubleshooting
 
