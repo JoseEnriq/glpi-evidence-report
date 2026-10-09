@@ -1,0 +1,28 @@
+# Secrets and local configuration (use .env.example and config.example.toml)
+.env
+.env.*
+!.env.example
+config.toml
+
+# Generated data: reports, cache of images downloaded from GLPI, demo output
+reports/
+document_cache/
+demo_output/
+*.docx
+*.pdf
+!docs/sample/*.pdf
+~$*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

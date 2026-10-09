@@ -1,0 +1,26 @@
+# Copy this file to "config.toml" and adjust it to your environment.
+# API tokens do NOT go here: they go in the .env file (see .env.example).
+#
+# Each [instances.<key>] section is one GLPI (a separate installation). The
+# <key> is a short lowercase name, used:
+#   - in .env:      GLPI_<KEY>_API_USER_TOKEN  (e.g. GLPI_MAIN_API_USER_TOKEN)
+#   - in the cache: document_cache/<key>/
+#   - in outputs:   reports/evidence_report_<key>_YYYY-MM.docx
+#
+# If you have a single GLPI, keep a single instance.
+
+[instances.main]
+name = "Central de Serviços"            # shown on the report cover and header (the report is in Portuguese)
+url = "https://glpi.example.com"        # without /apirest.php and without a trailing slash
+# Technicians included in the monthly report (generate_month.py). Matches a
+# FRAGMENT of the name registered in GLPI, case-insensitive — use a fragment
+# that identifies a single person (e.g. "Ana Ribeiro", not just "Ana").
+# An empty list includes every ticket, without grouping by technician.
+technicians = ["Ana Ribeiro", "Bruno Carvalho"]
+
+# A second GLPI (optional): uncomment, adjust, and add its token to .env
+# as GLPI_SECONDARY_API_USER_TOKEN.
+# [instances.secondary]
+# name = "Outra Central"
+# url = "https://glpi2.example.com"
+# technicians = []
