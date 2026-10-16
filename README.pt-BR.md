@@ -2,7 +2,7 @@
 
 [English](README.md) | **Português**
 
-Gera o "book de evidências" mensal de um contrato de suporte de TI (cada chamado atendido por cada técnico, com histórico, solução e as imagens anexadas) em Word e PDF, direto da API REST do GLPI.
+Gera o "book de evidências" mensal de uma equipe de suporte de TI (cada chamado atendido por cada técnico, com histórico, solução e as imagens anexadas) em Word e PDF, direto da API REST do GLPI.
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
 [![Testes](https://github.com/JoseEnriq/glpi-evidence-report/actions/workflows/tests.yml/badge.svg)](https://github.com/JoseEnriq/glpi-evidence-report/actions/workflows/tests.yml)
@@ -11,11 +11,11 @@ Gera o "book de evidências" mensal de um contrato de suporte de TI (cada chamad
 |---|---|---|
 | ![Capa](docs/img/cover.png) | ![Sumário](docs/img/contents.png) | ![Chamado](docs/img/ticket.png) |
 
-As imagens e o [PDF de exemplo](docs/sample/evidence_report_sample.pdf) foram gerados pelo modo demonstração, com dados fictícios. O book é em português porque foi feito para um contrato brasileiro; o código é em inglês.
+As imagens e o [PDF de exemplo](docs/sample/evidence_report_sample.pdf) foram gerados pelo modo demonstração, com dados fictícios. O book é em português, pensado para equipes brasileiras; o código é em inglês.
 
-## Por que eu fiz
+## O problema
 
-No meu trabalho, a equipe precisa comprovar todo mês os atendimentos de um contrato de serviço. O documento era montado a partir dos e-mails de notificação do GLPI, e um print só entrava se alguém tivesse movido o e-mail certo para a pasta certa. Era lento, dependia de uma pessoa e muitas imagens se perdiam, principalmente as anexadas aos acompanhamentos e à solução, e não ao chamado em si.
+Equipes que prestam suporte de TI por contrato costumam ter que comprovar, todo mês, os atendimentos feitos: um documento com cada chamado atendido por cada técnico, com histórico, solução e os prints anexados ao longo do atendimento. Montado à mão a partir das telas do GLPI ou dos e-mails de notificação, ele é lento, depende de quem conhece a rotina, e os prints se perdem, principalmente os anexados aos acompanhamentos e à solução, e não ao chamado em si.
 
 ## Como funciona
 
@@ -27,7 +27,7 @@ O programa fala com a API REST do GLPI, em modo somente leitura:
 4. baixa as imagens para um cache em disco, conferindo a assinatura de cada arquivo;
 5. monta o Word com python-docx e converte em PDF com o LibreOffice headless.
 
-Um único comando gera os books do mês anterior de todos os GLPIs configurados.
+Um único comando gera os books do mês anterior de todos os GLPIs configurados, e o `generate_month.bat` permite rodá-lo pelo Agendador de Tarefas do Windows.
 
 ```mermaid
 flowchart LR
@@ -67,21 +67,13 @@ sequenceDiagram
 
 ## Decisões
 
-- **Anexos de três origens.** A maior parte das imagens que faltavam estava nos acompanhamentos e na solução, então consulto o `Document_Item` de cada um deles, não só o do chamado.
+- **Anexos de três origens.** Os prints costumam estar nos acompanhamentos e na solução, então consulto o `Document_Item` de cada um deles, não só o do chamado.
 - **Validar os bytes, não a resposta.** O download de um documento pode voltar como uma página HTML de login ou de erro com status 200. Confiro a assinatura PNG/JPEG/GIF/BMP antes de salvar qualquer coisa como imagem.
 - **Confiar no `Content-Range`, não no tamanho da página.** Alguns servidores devolvem páginas menores que as pedidas, então a paginação segue o total informado pelo servidor.
 - **Perfil de menor privilégio.** O login costuma cair no Self-Service, que não vê os chamados de outros usuários, então o programa troca para o perfil de menor privilégio que vê.
 - **6 threads de propósito.** Cada chamado custa uns 12 pedidos; poucas threads e um cache de usuários e categorias deixam a geração rápida sem sobrecarregar o GLPI.
 
 A tabela completa, com referências ao código, e a organização dos módulos ficam em [docs/arquitetura.md](docs/arquitetura.md#decisões-técnicas).
-
-## Resultados
-
-Do uso em produção no meu trabalho:
-
-- os books mensais de todas as nossas instâncias do GLPI saem de um único comando, sem passo manual, e podem rodar pelo Agendador de Tarefas do Windows;
-- as imagens anexadas aos acompanhamentos e às soluções agora entram no book;
-- antes de abandonar o acesso ao banco, conferi campo a campo a saída da API contra uma leitura direta do banco.
 
 ## Rodar a demonstração
 
@@ -105,7 +97,3 @@ O `.docx` e o `.pdf` ficam em `demo_output/`. O PDF precisa do [LibreOffice](htt
 ## Testes
 
 Rode `pip install -r requirements-dev.txt` e depois `pytest`. Os testes cobrem as funções puras e o fluxo de ponta a ponta contra o GLPI simulado (erro 503 passageiro, página HTML servida como imagem, paginação além do limite do servidor) e rodam no GitHub Actions, em Ubuntu e Windows.
-
----
-
-© 2026 JoseEnriq. Todos os direitos reservados. Peça de portfólio: fique à vontade para ler o código e rodar a demonstração, mas não copie, modifique nem redistribua sem autorização.

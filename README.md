@@ -2,7 +2,7 @@
 
 **English** | [Português](README.pt-BR.md)
 
-Generates the monthly "evidence book" of an IT support contract (every ticket handled by each technician, with history, solution and attached screenshots) in Word and PDF, straight from the GLPI REST API.
+Generates the monthly "evidence book" of an IT support team (every ticket handled by each technician, with history, solution and attached screenshots) in Word and PDF, straight from the GLPI REST API.
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
 [![Tests](https://github.com/JoseEnriq/glpi-evidence-report/actions/workflows/tests.yml/badge.svg)](https://github.com/JoseEnriq/glpi-evidence-report/actions/workflows/tests.yml)
@@ -11,11 +11,11 @@ Generates the monthly "evidence book" of an IT support contract (every ticket ha
 |---|---|---|
 | ![Cover](docs/img/cover.png) | ![Table of contents](docs/img/contents.png) | ![Ticket](docs/img/ticket.png) |
 
-The images and the [sample PDF](docs/sample/evidence_report_sample.pdf) come from demo mode, with fictitious data. The report itself is in Portuguese because it was built for a Brazilian contract; the code is in English.
+The images and the [sample PDF](docs/sample/evidence_report_sample.pdf) come from demo mode, with fictitious data. The report is in Portuguese, aimed at Brazilian teams; the code is in English.
 
-## Why I built it
+## The problem
 
-At work, our team has to prove every month the support it delivered under a service contract. The document used to be assembled from GLPI's notification e-mails, and a screenshot only made it in if someone had moved the right e-mail to the right folder. It was slow, it depended on one person, and many images were lost, especially the ones attached to followups and solutions instead of the ticket itself.
+Teams that provide IT support under a service contract usually have to prove, every month, the work they delivered: a document with every ticket each technician handled, with its history, solution and the screenshots attached along the way. Put together by hand from GLPI screens or notification e-mails, it is slow, depends on whoever knows the routine, and screenshots go missing, especially the ones attached to followups and solutions instead of the ticket itself.
 
 ## How it works
 
@@ -27,7 +27,7 @@ The program talks to the GLPI REST API, read-only:
 4. downloads the images into a disk cache, checking each file's signature;
 5. builds the Word document with python-docx and converts it to PDF with headless LibreOffice.
 
-One command generates last month's reports for every configured GLPI instance.
+One command generates last month's reports for every configured GLPI instance, and `generate_month.bat` can run it from Windows Task Scheduler.
 
 ```mermaid
 flowchart LR
@@ -67,21 +67,13 @@ sequenceDiagram
 
 ## Design decisions
 
-- **Attachments from three origins.** Most missing images were attached to followups and solutions, so I query `Document_Item` for each of them, not only for the ticket.
+- **Attachments from three origins.** Screenshots are often attached to followups and solutions, so I query `Document_Item` for each of them, not only for the ticket.
 - **Validate the bytes, not the response.** A document download can come back as an HTML login or error page with status 200. I check the PNG/JPEG/GIF/BMP signature before saving anything as an image.
 - **Trust `Content-Range`, not the page size.** Some servers return smaller pages than requested, so pagination follows the total the server reports.
 - **Least privileged profile.** Login usually lands on Self-Service, which cannot see other users' tickets, so the program switches to the least privileged profile that can.
 - **6 workers on purpose.** Each ticket costs about 12 requests; a small thread pool and a cache of users and categories keep it fast without overloading GLPI.
 
 The full table, pointing to the code, and the module layout are in [docs/arquitetura.md](docs/arquitetura.md#decisões-técnicas) (in Portuguese).
-
-## Results
-
-From using it in production at work:
-
-- the monthly reports for all our GLPI instances come out of a single command, with no manual step, and can run from Windows Task Scheduler;
-- images attached to followups and solutions now make it into the report;
-- before dropping database access, I checked the API output field by field against a direct database read.
 
 ## Run the demo
 
@@ -105,7 +97,3 @@ You need the REST API enabled with token login and a user token with a read-only
 ## Tests
 
 Run `pip install -r requirements-dev.txt` and then `pytest`. The suite covers the pure functions and the end-to-end flow against the simulated GLPI (a transient 503, an HTML page served as an image, pagination past the server's limit) and runs on Ubuntu and Windows in GitHub Actions.
-
----
-
-© 2026 JoseEnriq. All rights reserved. A portfolio piece: feel free to read the code and run the demo, but do not copy, modify or redistribute it without permission.
