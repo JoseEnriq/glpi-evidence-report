@@ -27,17 +27,53 @@ O programa fala com a API REST do GLPI, em modo somente leitura:
 4. baixa as imagens para um cache em disco, conferindo a assinatura de cada arquivo;
 5. monta o Word com python-docx e converte em PDF com o LibreOffice headless.
 
-Um único comando gera os books do mês anterior de todos os GLPIs configurados. Diagramas e organização dos módulos estão em [docs/arquitetura.md](docs/arquitetura.md).
+Um único comando gera os books do mês anterior de todos os GLPIs configurados.
+
+```mermaid
+flowchart LR
+    CFG["config.toml<br/>instâncias e técnicos"] --> CLI
+    ENV[".env<br/>tokens de API"] --> CLI
+    CLI["generate_month.py<br/>generate_report.py"] --> API["glpi_api.py<br/>sessão por token,<br/>paginação, repetição,<br/>6 chamados em paralelo"]
+    API <-->|"HTTPS · somente GET"| GLPI[("GLPI<br/>API REST")]
+    API --> MOD["models.py<br/>Ticket, Attachment..."]
+    CLI --> FILES["glpi_files.py<br/>download, validação<br/>e cache das imagens"]
+    FILES <-->|"GET /Document/{id}"| GLPI
+    MOD --> DOCX["docx_builder.py<br/>documento Word"]
+    FILES --> DOCX
+    DOCX --> PDF["pdf_utils.py<br/>LibreOffice → PDF"]
+```
+
+O que acontece com um GLPI, do login ao documento:
+
+```mermaid
+sequenceDiagram
+    participant P as Programa
+    participant G as API REST do GLPI
+    P->>G: GET /initSession (Authorization: user_token)
+    G-->>P: session_token
+    P->>G: GET /getMyProfiles → POST /changeActiveProfile
+    Note over P,G: sai do Self-Service para um perfil que vê todos os chamados
+    P->>G: GET /search/Ticket (período, range=0-99)
+    G-->>P: ids + Content-Range: 0-99/148 (segue até o total)
+    loop cada chamado (6 em paralelo)
+        P->>G: /Ticket/{id}, Ticket_User, ITILFollowup, ITILSolution
+        P->>G: Document_Item do chamado, de cada acompanhamento e da solução
+    end
+    P->>G: GET /Document/{id} (Accept: application/octet-stream)
+    G-->>P: bytes da imagem → valida assinatura → cache
+    P->>G: GET /killSession
+    P->>P: monta o .docx → converte em PDF
+```
 
 ## Decisões
 
 - **Anexos de três origens.** A maior parte das imagens que faltavam estava nos acompanhamentos e na solução, então consulto o `Document_Item` de cada um deles, não só o do chamado.
 - **Validar os bytes, não a resposta.** O download de um documento pode voltar como uma página HTML de login ou de erro com status 200. Confiro a assinatura PNG/JPEG/GIF/BMP antes de salvar qualquer coisa como imagem.
 - **Confiar no `Content-Range`, não no tamanho da página.** Alguns servidores devolvem páginas menores que as pedidas, então a paginação segue o total informado pelo servidor.
-- **Perfil de menor privilégio.** Depois do login a sessão costuma estar no Self-Service, que não vê os chamados de outros usuários. O programa troca para o perfil de menor privilégio que vê, dando preferência aos de leitura.
+- **Perfil de menor privilégio.** O login costuma cair no Self-Service, que não vê os chamados de outros usuários, então o programa troca para o perfil de menor privilégio que vê.
 - **6 threads de propósito.** Cada chamado custa uns 12 pedidos; poucas threads e um cache de usuários e categorias deixam a geração rápida sem sobrecarregar o GLPI.
 
-A tabela completa, com referências ao código, fica em [docs/arquitetura.md](docs/arquitetura.md#decisões-técnicas).
+A tabela completa, com referências ao código, e a organização dos módulos ficam em [docs/arquitetura.md](docs/arquitetura.md#decisões-técnicas).
 
 ## Resultados
 
@@ -45,7 +81,7 @@ Do uso em produção no meu trabalho:
 
 - os books mensais de todas as nossas instâncias do GLPI saem de um único comando, sem passo manual, e podem rodar pelo Agendador de Tarefas do Windows;
 - as imagens anexadas aos acompanhamentos e às soluções agora entram no book;
-- antes de abandonar o acesso direto ao banco, comparei campo a campo a saída da API com uma leitura do banco até baterem, e só então removi a conexão com o banco.
+- antes de abandonar o acesso ao banco, conferi campo a campo a saída da API contra uma leitura direta do banco.
 
 ## Rodar a demonstração
 
@@ -64,16 +100,11 @@ O `.docx` e o `.pdf` ficam em `demo_output/`. O PDF precisa do [LibreOffice](htt
 
 ## Usar com o seu GLPI
 
-É preciso ter a API REST habilitada com login por token externo, um cliente de API que aceite a sua máquina e um token de usuário com perfil de leitura. Depois, copie o `config.example.toml` e o `.env.example`, preencha as instâncias e os tokens e rode `python diagnose_api.py` para conferir o acesso. O passo a passo, os comandos e os problemas comuns estão em [docs/uso.md](docs/uso.md).
+É preciso ter a API REST habilitada com login por token e um token de usuário com perfil de leitura. Preencha o `config.toml` e o `.env` a partir dos arquivos de exemplo e rode `python diagnose_api.py` para conferir o acesso. Configuração, comandos e problemas comuns estão em [docs/uso.md](docs/uso.md).
 
 ## Testes
 
-```bash
-pip install -r requirements-dev.txt
-pytest
-```
-
-Os testes cobrem as funções puras e o fluxo de ponta a ponta contra o GLPI simulado (erro 503 passageiro, página HTML servida como imagem, paginação além do limite do servidor) e rodam no GitHub Actions, em Ubuntu e Windows.
+Rode `pip install -r requirements-dev.txt` e depois `pytest`. Os testes cobrem as funções puras e o fluxo de ponta a ponta contra o GLPI simulado (erro 503 passageiro, página HTML servida como imagem, paginação além do limite do servidor) e rodam no GitHub Actions, em Ubuntu e Windows.
 
 ---
 
