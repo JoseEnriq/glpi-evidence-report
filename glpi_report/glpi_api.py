@@ -51,8 +51,8 @@ from datetime import date, datetime, timedelta
 
 import requests
 
-from config import Instance
-from models import (
+from glpi_report.config import Instance
+from glpi_report.models import (
     GLPI_ACTOR_TYPE,
     GLPI_PRIORITY,
     GLPI_STATUS,
@@ -309,7 +309,7 @@ class GlpiSource:
         self.client.close()
 
     def create_downloader(self, cache_dir: str | None = None):
-        from glpi_files import DocumentDownloader
+        from glpi_report.glpi_files import DocumentDownloader
 
         return DocumentDownloader(self.key, self.client, cache_dir)
 

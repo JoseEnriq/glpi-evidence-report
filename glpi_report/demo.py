@@ -10,9 +10,9 @@ the HTTP layer (see simulator/fake_glpi.py). It does not read .env or
 config.toml, and no request goes out to the network.
 
 Usage:
-    python demo.py            # writes to demo_output/
-    python demo.py --no-pdf   # .docx only
-    python demo.py --clean    # deletes demo_output/ first (including the image cache)
+    python -m glpi_report.demo           # writes to demo_output/
+    python -m glpi_report.demo --no-pdf  # .docx only
+    python -m glpi_report.demo --clean   # deletes demo_output/ first (including the image cache)
 """
 
 import argparse
@@ -21,7 +21,7 @@ import shutil
 import sys
 import time
 
-from generate_report import run
+from glpi_report.generate_report import run
 from simulator import DEMO_INSTANCE, DEMO_PERIOD
 from simulator.fake_glpi import DEMO_TOKEN, fake_glpi_session
 

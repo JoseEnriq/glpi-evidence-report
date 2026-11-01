@@ -4,12 +4,12 @@ from datetime import date, datetime
 
 import pytest
 
-from config import ConfigError, choose_instance, load_instances
-from docx_builder import _period_text, _sanitize_text
-from generate_report import filter_by_technician
-from glpi_api import _parse_datetime, _total_from_content_range
-from image_utils import detect_mime
-from models import ACTOR_ASSIGNED, ACTOR_OBSERVER, Actor, Ticket, Update, html_to_text
+from glpi_report.config import ConfigError, choose_instance, load_instances
+from glpi_report.docx_builder import _period_text, _sanitize_text
+from glpi_report.generate_report import filter_by_technician
+from glpi_report.glpi_api import _parse_datetime, _total_from_content_range
+from glpi_report.image_utils import detect_mime
+from glpi_report.models import ACTOR_ASSIGNED, ACTOR_OBSERVER, Actor, Ticket, Update, html_to_text
 
 
 @pytest.mark.parametrize(

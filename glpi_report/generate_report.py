@@ -9,15 +9,15 @@ Each instance in config.toml is a separate GLPI, selected with --instance.
 Ticket numbers are not unique across instances, so each run processes one.
 
 Usage examples:
-    python generate_report.py --instance main --ids 101,105,110
-    python generate_report.py --instance main --period 2026-08-01 2026-08-31
-    python generate_report.py --instance main --period 2026-08-01 2026-08-31 --technician "Ana Ribeiro" --pdf
+    python -m glpi_report.generate_report --instance main --ids 101,105,110
+    python -m glpi_report.generate_report --instance main --period 2026-08-01 2026-08-31
+    python -m glpi_report.generate_report --instance main --period 2026-08-01 2026-08-31 --technician "Ana Ribeiro" --pdf
 
 Before the first use, run:
-    python diagnose_api.py
+    python -m glpi_report.diagnose_api
 to check that each GLPI API answers and that the .env token works.
 To see the result without any GLPI, run:
-    python demo.py
+    python -m glpi_report.demo
 
 The .docx files go to the "reports/" folder by default (created
 automatically). If `--output` is just a file name it is also saved there;
@@ -31,10 +31,10 @@ from datetime import datetime
 
 from dotenv import load_dotenv
 
-from config import ConfigError, Instance, choose_instance, load_instances
-from docx_builder import build_report
-from glpi_api import GlpiAccessError, open_source
-from pdf_utils import convert_docx_to_pdf
+from glpi_report.config import ConfigError, Instance, choose_instance, load_instances
+from glpi_report.docx_builder import build_report
+from glpi_report.glpi_api import GlpiAccessError, open_source
+from glpi_report.pdf_utils import convert_docx_to_pdf
 
 DEFAULT_OUTPUT_DIR = "reports"
 
