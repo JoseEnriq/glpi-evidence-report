@@ -85,14 +85,14 @@ cd glpi-evidence-report
 python -m venv .venv
 .venv\Scripts\activate          # Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
-python demo.py
+python -m glpi_report.demo
 ```
 
 O `.docx` e o `.pdf` ficam em `demo_output/`. O PDF precisa do [LibreOffice](https://www.libreoffice.org/) instalado; sem ele, sai só o `.docx`.
 
 ## Usar com o seu GLPI
 
-É preciso ter a API REST habilitada com login por token e um token de usuário com perfil de leitura. Preencha o `config.toml` e o `.env` a partir dos arquivos de exemplo e rode `python diagnose_api.py` para conferir o acesso. Configuração, comandos e problemas comuns estão em [docs/uso.md](docs/uso.md).
+É preciso ter a API REST habilitada com login por token e um token de usuário com perfil de leitura. Preencha o `config.toml` e o `.env` a partir dos arquivos de exemplo e rode `python -m glpi_report.diagnose_api` para conferir o acesso. Configuração, comandos e problemas comuns estão em [docs/uso.md](docs/uso.md).
 
 ## Testes
 
