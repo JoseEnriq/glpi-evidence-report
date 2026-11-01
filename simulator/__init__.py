@@ -5,7 +5,7 @@ Demo mode: a simulated GLPI (fake_glpi.py) with fictitious data and images
 
 from datetime import date
 
-from config import Instance
+from glpi_report.config import Instance
 
 DEMO_PERIOD = (date(2026, 8, 1), date(2026, 8, 31))
 

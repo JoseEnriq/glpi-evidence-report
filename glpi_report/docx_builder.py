@@ -34,7 +34,7 @@ from docx.oxml import OxmlElement, parse_xml
 from docx.oxml.ns import nsdecls, qn
 from docx.shared import Cm, Pt, RGBColor
 
-from models import GLPI_STATUS, STATUS_CLOSED, STATUS_SOLVED
+from glpi_report.models import GLPI_STATUS, STATUS_CLOSED, STATUS_SOLVED
 
 # ---------------------------------------------------------------------------
 # Sizes and colors

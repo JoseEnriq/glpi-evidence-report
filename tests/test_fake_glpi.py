@@ -6,10 +6,10 @@ import os
 import pytest
 from docx import Document
 
-import glpi_api
-from generate_report import run
-from glpi_api import GlpiAccessError, open_source
-from models import ORIGIN_FOLLOWUP, ORIGIN_SOLUTION, ORIGIN_TICKET
+from glpi_report import glpi_api
+from glpi_report.generate_report import run
+from glpi_report.glpi_api import GlpiAccessError, open_source
+from glpi_report.models import ORIGIN_FOLLOWUP, ORIGIN_SOLUTION, ORIGIN_TICKET
 from simulator import DEMO_INSTANCE, DEMO_PERIOD
 from simulator.fake_glpi import DEMO_TOKEN, PAGE_LIMIT, fake_glpi_session
 

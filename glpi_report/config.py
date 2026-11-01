@@ -43,7 +43,7 @@ def load_instances(path: str | None = None) -> dict[str, Instance]:
     if not os.path.isfile(path):
         raise ConfigError(
             f"Configuration file '{path}' not found. Copy {EXAMPLE_CONFIG_FILE} to "
-            f"{DEFAULT_CONFIG_FILE} and fill it in (or run 'python demo.py' to see an example without GLPI)."
+            f"{DEFAULT_CONFIG_FILE} and fill it in (or run 'python -m glpi_report.demo' to see an example without GLPI)."
         )
     with open(path, "rb") as f:
         data = tomllib.load(f)

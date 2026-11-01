@@ -6,8 +6,8 @@ reachable from this machine and whether the .env token works — run it
 before the first use or whenever a report fails. Read-only.
 
 Usage:
-    python diagnose_api.py                      # every instance
-    python diagnose_api.py --instance main   # only one
+    python -m glpi_report.diagnose_api                  # every instance
+    python -m glpi_report.diagnose_api --instance main  # only one
 """
 
 import argparse
@@ -18,8 +18,8 @@ from datetime import date
 import requests
 from dotenv import load_dotenv
 
-from config import ConfigError, choose_instance, load_instances
-from glpi_api import GlpiAccessError, instance_env, instance_url, open_source, verify_ssl
+from glpi_report.config import ConfigError, choose_instance, load_instances
+from glpi_report.glpi_api import GlpiAccessError, instance_env, instance_url, open_source, verify_ssl
 
 # What the API answers to a request WITHOUT credentials, and what it means.
 # A credential-less request is safe and already tells apart "API disabled",

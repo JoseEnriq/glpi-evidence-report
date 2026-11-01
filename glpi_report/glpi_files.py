@@ -12,7 +12,7 @@ and are not downloaded again. Every file is validated as a real image
 cache, so an error page is never saved as if it were an image.
 
 Standalone test (downloads a single document, to check access):
-    python glpi_files.py --instance main --doc 123
+    python -m glpi_report.glpi_files --instance main --doc 123
 """
 
 from __future__ import annotations
@@ -25,9 +25,9 @@ import sys
 import requests
 from dotenv import load_dotenv
 
-from config import ConfigError, choose_instance, load_instances
-from glpi_api import ApiClient, GlpiAccessError, open_source
-from image_utils import EXTENSION_BY_MIME, detect_mime
+from glpi_report.config import ConfigError, choose_instance, load_instances
+from glpi_report.glpi_api import ApiClient, GlpiAccessError, open_source
+from glpi_report.image_utils import EXTENSION_BY_MIME, detect_mime
 
 CACHE_DIR = "document_cache"
 

@@ -7,9 +7,9 @@ itself. This is what generate_month.bat runs (it can be scheduled with
 Windows Task Scheduler or cron).
 
 Examples:
-    python generate_month.py                       # previous month, all instances
-    python generate_month.py --month 2026-08       # a specific month
-    python generate_month.py --instances main   # a single instance
+    python -m glpi_report.generate_month                   # previous month, all instances
+    python -m glpi_report.generate_month --month 2026-08   # a specific month
+    python -m glpi_report.generate_month --instances main  # a single instance
 """
 
 import argparse
@@ -20,8 +20,8 @@ from datetime import date
 
 from dotenv import load_dotenv
 
-from config import ConfigError, choose_instance, load_instances
-from generate_report import DEFAULT_OUTPUT_DIR, run
+from glpi_report.config import ConfigError, choose_instance, load_instances
+from glpi_report.generate_report import DEFAULT_OUTPUT_DIR, run
 
 
 def previous_month(today: date) -> tuple[int, int]:
