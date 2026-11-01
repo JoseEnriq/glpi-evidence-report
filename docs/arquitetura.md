@@ -71,20 +71,22 @@ sequenceDiagram
 ## Estrutura
 
 ```text
-├── generate_month.py / .bat   books do mês de todas as instâncias
-├── generate_report.py         fluxo de um book (CLI)
-├── glpi_api.py                tudo que fala com a API REST do GLPI
-├── glpi_files.py              download das imagens com validação e cache
-├── models.py                  modelo de dados e tradução dos códigos do GLPI
-├── docx_builder.py            monta o Word (não fala com o GLPI)
-├── pdf_utils.py               .docx → PDF via LibreOffice
-├── image_utils.py             tipo real da imagem pela assinatura
-├── config.py                  leitura do config.toml
-├── diagnose_api.py            confere o acesso à API
-├── demo.py                    modo demonstração
-├── simulator/                 GLPI simulado, dados e imagens fictícios
-├── tests/                     pytest
-└── docs/                      documentação, prints e PDF de exemplo
+├── glpi_report/                 o programa (pacote Python)
+│   ├── generate_month.py        books do mês de todas as instâncias
+│   ├── generate_report.py       fluxo de um book (CLI)
+│   ├── diagnose_api.py          confere o acesso à API
+│   ├── demo.py                  modo demonstração
+│   ├── glpi_api.py              tudo que fala com a API REST do GLPI
+│   ├── glpi_files.py            download das imagens com validação e cache
+│   ├── models.py                modelo de dados e tradução dos códigos do GLPI
+│   ├── docx_builder.py          monta o Word (não fala com o GLPI)
+│   ├── pdf_utils.py             .docx → PDF via LibreOffice
+│   ├── image_utils.py           tipo real da imagem pela assinatura
+│   └── config.py                leitura do config.toml
+├── simulator/                   GLPI simulado, dados e imagens fictícios
+├── tests/                       pytest
+├── docs/                        documentação, prints e PDF de exemplo
+└── generate_month.bat           atalho do Windows para os books do mês
 ```
 
 ## GLPI simulado e testes

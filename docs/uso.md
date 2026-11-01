@@ -4,7 +4,7 @@ Como rodar a demonstração em detalhe e como configurar o programa para um GLPI
 
 ## Modo demonstração
 
-O `python demo.py` gera um book completo com dados fictícios, sem precisar de GLPI (o servidor é simulado na camada HTTP; detalhes em [arquitetura.md](arquitetura.md#glpi-simulado-e-testes)). Saída esperada (resumida):
+O `python -m glpi_report.demo` gera um book completo com dados fictícios, sem precisar de GLPI (o servidor é simulado na camada HTTP; detalhes em [arquitetura.md](arquitetura.md#glpi-simulado-e-testes)). Saída esperada (resumida):
 
 ```text
 13 ticket(s) found in the given period.
@@ -22,7 +22,7 @@ O aviso do documento 514 é proposital: o simulador devolve uma página HTML no 
 - O `.docx` e o `.pdf` ficam em `demo_output/`.
 - O PDF só é gerado se o [LibreOffice](https://www.libreoffice.org/) estiver instalado; sem ele, sai só o `.docx`.
 - Rode de novo para ver o cache em ação (`0 downloaded now, 12 from cache`).
-- `python demo.py --clean` apaga o `demo_output/` (inclusive o cache de imagens) e recomeça do zero.
+- `python -m glpi_report.demo --clean` apaga o `demo_output/` (inclusive o cache de imagens) e recomeça do zero.
 
 ## Configuração no GLPI
 
@@ -48,17 +48,19 @@ Os dois arquivos estão no `.gitignore`.
 
 ## Comandos
 
+Rode sempre a partir da raiz do repositório: o `-m` executa um módulo de dentro do pacote `glpi_report`.
+
 ```bash
-python diagnose_api.py                                # confere API, IP liberado, token e perfil de cada GLPI
-python generate_month.py                              # books do mês anterior de todas as instâncias (.docx + .pdf)
-python generate_month.py --month 2026-08 --instances main
-python generate_report.py --instance main --period 2026-08-01 2026-08-31 --technician "Ana Ribeiro" --pdf
-python generate_report.py --instance main --ids 101,105 --pdf
+python -m glpi_report.diagnose_api       # confere API, IP liberado, token e perfil de cada GLPI
+python -m glpi_report.generate_month     # books do mês anterior de todas as instâncias (.docx + .pdf)
+python -m glpi_report.generate_month --month 2026-08 --instances main
+python -m glpi_report.generate_report --instance main --period 2026-08-01 2026-08-31 --technician "Ana Ribeiro" --pdf
+python -m glpi_report.generate_report --instance main --ids 101,105 --pdf
 ```
 
 ## Agendamento no Windows
 
-O `generate_month.bat` roda o `generate_month.py`. Aberto com duplo clique, ele espera uma tecla no final para dar tempo de ler a saída. No Agendador de Tarefas, passe o argumento `--scheduled`: não há pausa, e uma execução com falha é informada pelo código de saída.
+O `generate_month.bat` roda o `python -m glpi_report.generate_month`. Aberto com duplo clique, ele espera uma tecla no final para dar tempo de ler a saída. No Agendador de Tarefas, passe o argumento `--scheduled`: não há pausa, e uma execução com falha é informada pelo código de saída.
 
 ## Se algo falhar
 
